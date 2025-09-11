@@ -20,15 +20,19 @@ exports.createRegister = async (req, res) => {
 };
 
 
-// Get all registers
-exports.getRegisters = async (req, res) => {
+
+exports.getLatestRegister = async (req, res) => {
   try {
-    const registers = await Register.find();
-    res.json(registers);
+    const register = await Register.findOne().sort({ createdAt: -1 }); // sort newest first
+    if (!register) {
+      return res.status(404).json({ message: "No register found" });
+    }
+    res.json(register);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // Get all participants across all registers
 exports.getAllParticipants = async (req, res) => {
