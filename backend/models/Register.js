@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const participantSchema = new mongoose.Schema({
- name: { type: String, required: true },
+  name: { type: String, required: true },
   idNumber: { type: String, required: true },
   saceNumber: String,
   postLevel: String,
@@ -21,6 +21,8 @@ const registerSchema = new mongoose.Schema({
   contactPerson: String,
   contactNumber: String,
   email: String,
+  providerSignature: { type: String }, // Changed to lowercase 'p' to match frontend
+  dateSub: String,
   participants: [participantSchema],
   createdAt: { type: Date, default: Date.now },
 });
